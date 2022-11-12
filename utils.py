@@ -1,4 +1,10 @@
+import os.path
+
 filename = 'data/apache_logs.txt'
+
+
+def check_file(filename):
+    return os.path.exists(filename)
 
 
 def read_file(filename):
@@ -16,12 +22,15 @@ def map_query(act, data):
     return map(lambda v: v.split(' ')[column], data)
 
 
-def unique_query(act, *args, **kwargs):
-    return set(act)
+def unique_query(data, *args, **kwargs):
+    return set(data)
 
 
 def sort_query(act, data):
-    return sorted(data, reverse=act)
+    if act == 'asc':
+        srt = False
+    srt = True
+    return sorted(data, reverse=srt)
 
 
 def limit_query(act, data):
