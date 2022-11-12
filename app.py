@@ -19,4 +19,4 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(port=25000, debug=True)
+    app.run(port=25000)
