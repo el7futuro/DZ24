@@ -3,9 +3,9 @@ import os
 from flask import Blueprint, request, jsonify
 from marshmallow import ValidationError
 
-from app import DATA_DIR
+# from app import DATA_DIR, check_file
 from request import BatchRequestSchema
-from utils import query_action, check_file
+from utils import query_action, check_file, file_name
 
 main_blueprint = Blueprint('main_blueprint', __name__)
 
@@ -19,8 +19,11 @@ def perform_query():
         return jsonify(e.messages), 400
 
     # проверить, что файла file_name существует в папке DATA_DIR, при ошибке вернуть ошибку 400
-    if check_file():
-        raise FileNotFoundError(400)
+    if not check_file(file_name):
+        try:
+            raise FileNotFoundError
+        except FileNotFoundError:
+            return 'file not found', 400
 
 
 

@@ -1,10 +1,10 @@
 import os.path
 
-filename = 'data/apache_logs.txt'
+file_name = 'data/1apache_logs.txt'
 
 
-def check_file(filename):
-    return os.path.exists(filename)
+def check_file(file_name):
+    return os.path.exists(file_name)
 
 
 def read_file(filename):
@@ -48,7 +48,7 @@ dict_function = {
 
 def query_action(cmd, value, data):
     if data is None:
-        gen = read_file(filename)
+        gen = read_file(file_name)
     else:
         gen = data
     res = dict_function[cmd](act=value, data=gen)
