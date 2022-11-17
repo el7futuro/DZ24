@@ -9,7 +9,7 @@ def check_file(file_name: str) -> bool:
     return os.path.exists(file_name)
 
 
-def read_file(file_name: str) -> Generator[str]:
+def read_file(file_name: str) -> Generator[str, None, None]:
     with open(file_name) as f:
         for row in f:
             yield row
@@ -28,21 +28,21 @@ def unique_query(data: Iterable[str], *args: Any, **kwargs: Any) -> Set[str]:
     return set(data)
 
 
-def sort_query(act: str, data: Iterable[str]) -> Iterable[str]:
+def sort_query(act: str, data: Iterable[str]) -> List[str]:
     if act == 'asc':
         srt = False
     srt = True
     return sorted(data, reverse=srt)
 
 
-def limit_query(act: str, data: Iterable[str]) -> Iterable[str]:
-    n = int(act)
-    return list(data[:n])
+def limit_query(act: str, data: Iterable[str]) -> List[str]:
+    n: int = int(act)
+    return list(data)[:n]
 
 
-def regex_query(data: Iterable[str]) -> Iterable[str]:
-    regex = re.compile(data)
-    return filter(lambda v: regex.search(v))
+def regex_query(act: str, data: Iterable[str]) -> Iterable[str]:
+    regex = re.compile(act)
+    return filter(lambda v: regex.search(v), data)
 
 
 
